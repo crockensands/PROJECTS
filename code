@@ -1,4 +1,45 @@
-elif event.type == pygame.KEYDOWN:
+import pygame
+pygame.init()
+
+screen_height=700
+screen_width=600
+
+screen=pygame.display.set_mode((screen_height,screen_width))
+
+red = (255,0,0)
+gold = (255,215,0)
+black = (0,0,0)
+
+y=red
+
+layer = [] 
+
+
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        
+        elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_1:
                 new_rect = (0, 0, 50, 50)
                 layer.append(new_rect)
+
+            if event.key == pygame.K_2:
+                new_rect = (0,50, 50, 50)
+                layer.append(new_rect)
+
+    screen.fill(black) 
+    #pygame.draw.rect(screen,gold,(200,100,100,100))
+    # pygame.draw.rect(screen,red,(100,100,100,100)) 
+
+    for x in layer:
+        pygame.draw.rect(screen,y,(x))
+        y=gold
+        
+
+    pygame.display.flip()
+
+pygame.quit()
