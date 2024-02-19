@@ -1,2 +1,4 @@
-sdf sd f
- a Sas
+elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_1:
+                new_rect = (0, 0, 50, 50)
+                layer.append(new_rect)
