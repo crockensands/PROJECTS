@@ -1,0 +1,48 @@
+import pygame
+
+# Initialize Pygame
+pygame.init()
+
+# Now you can use Pygame features and modules
+
+# For example, creating a window
+screen = pygame.display.set_mode((800, 600))
+
+grey = (176,196,222)
+red = (255,0,0)
+yellow =(255,215,0)
+
+layer = [(0, 0, 50, 50),(50, 50, 50, 50),(100, 100, 50, 50)]
+
+layer[0]=(200,200,50,50)
+
+
+
+# Game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+            
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_1:
+                new_rect = (0, 0, 50, 50)
+                layer.append(new_rect)
+
+    # Game logic and drawing code go here
+    screen.fill(grey)
+
+    # pygame.draw.rect(screen, red, (50, 50, 50, 50))  
+    # pygame.draw.rect(screen, yellow, (100, 50, 50, 50))    # (x,y,rectheight,wi
+    # dth)
+
+    for x in layer:
+        pygame.draw.rect(screen,red,(x))
+
+
+
+    pygame.display.flip()
+
+# Quit Pygame
+pygame.quit()
