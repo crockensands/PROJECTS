@@ -12,8 +12,8 @@ black = (0,0,0)
 
 y=red
 
-layer = [] 
-
+layer_gold= [] 
+layer_red=[]
 
 
 running = True
@@ -24,19 +24,86 @@ while running:
         
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_1:
-                new_rect = (0, 0, 50, 50)
-                layer.append(new_rect)
+                if(0,0,50,50)not in layer_red:
+                  new_rect = (0, 0, 50, 50)
+                  layer_gold.append(new_rect)
 
             if event.key == pygame.K_2:
-                new_rect = (0,50, 50, 50)
-                layer.append(new_rect)
+             if(50,0,50,50)not in layer_red:
+                new_rect = (50,0, 50, 50)
+                layer_gold.append(new_rect)
+
+            if event.key == pygame.K_3:
+                new_rect = (100,0, 50, 50)
+                layer_gold.append(new_rect) 
+
+            if event.key == pygame.K_4:
+                new_rect = (150,0, 50, 50)
+                layer_gold.append(new_rect)
+
+            if event.key == pygame.K_5:
+                new_rect = (200,0, 50, 50)
+                layer_gold.append(new_rect)
+
+            if event.key == pygame.K_6:
+                new_rect = (250,0, 50, 50)
+                layer_gold.append(new_rect)
+
+            if event.key == pygame.K_7:
+                new_rect = (300,0, 50, 50)
+                layer_gold.append(new_rect) 
+
+
+
+            if event.key == pygame.K_q:
+                if(0,0,50,50)not in layer_gold:
+                 new_rect = (0,0, 50, 50)
+                 layer_red.append(new_rect)
+
+            if event.key == pygame.K_w:
+                if(50,0,50,50)not in layer_gold:
+                 new_rect = (50,0, 50, 50)
+                 layer_red.append(new_rect)
+
+            if event.key == pygame.K_e:
+                if(100,0,50,50)not in layer_gold:
+                 new_rect = (100,0, 50, 50)
+                 layer_red.append(new_rect)
+
+            if event.key == pygame.K_r:
+                if(150,0,50,50)not in layer_gold:
+                 new_rect = (150,0, 50, 50)
+                 layer_red.append(new_rect)
+
+            if event.key == pygame.K_t:
+                if(200,0,50,50)not in layer_gold:
+                 new_rect = (200,0, 50, 50)
+                 layer_red.append(new_rect)
+
+            if event.key == pygame.K_y:
+                if(250,0,50,50)not in layer_gold:
+                 new_rect = (250,0, 50, 50)
+                 layer_red.append(new_rect)
+
+            if event.key == pygame.K_u:
+                if(300,0,50,50)not in layer_gold:
+                 new_rect = (300,0, 50, 50)
+                 layer_red.append(new_rect)                                                                                     
 
     screen.fill(black) 
     #pygame.draw.rect(screen,gold,(200,100,100,100))
     # pygame.draw.rect(screen,red,(100,100,100,100)) 
 
-    for x in layer:
-        pygame.draw.rect(screen,y,(x))
+    for x in layer_red:
+        pygame.draw.rect(screen,red,(x))
+       
+    for x in layer_gold:
+        pygame.draw.rect(screen,gold,(x))     
+         
+       
+       
+       
+       
         y=gold
         
 
