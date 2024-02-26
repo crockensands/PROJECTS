@@ -1,1 +1,86 @@
+import pygame
+import sys
+
+# Initialize Pygame
+pygame.init()
+
+# Constants
+WIDTH, HEIGHT = 600, 600
+ROWS, COLS = 10, 10
+CELL_SIZE = WIDTH // COLS, HEIGHT // ROWS
+
+# Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+red = (255,0,0)
+# Create the grid
+grid = [[WHITE for _ in range(COLS)] for _ in range(ROWS)]
+
+# List to store clicked coordinates
+clicked_coordinates = []
+
+# Set up the Pygame window
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Pygame Grid")
+
+# Main game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 3:     
+                # Get the mouse position
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+
+                # Calculate the grid cell coordinates
+                col = mouse_x // CELL_SIZE[0]
+                row = mouse_y // CELL_SIZE[1]
+
+                # Change the color of the clicked cell
+                if 0 <= row < ROWS and 0 <= col < COLS:
+                    if grid[row][col] == WHITE:
+                        grid[row][col] = BLACK
+                        clicked_coordinates.append((col, row))
+                    else:
+                        grid[row][col] = WHITE
+                        clicked_coordinates.remove((col, row))
+            
+            if event.button == 1:     
+                # Get the mouse position
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+
+                # Calculate the grid cell coordinates
+                col = mouse_x // CELL_SIZE[0]
+                row = mouse_y // CELL_SIZE[1]
+
+                # Change the color of the clicked cell
+                if 0 <= row < ROWS and 0 <= col < COLS:
+                    if grid[row][col] == WHITE:
+                        grid[row][col] = red
+                        clicked_coordinates.append((col, row))
+                    else:
+                        grid[row][col] = WHITE
+                        clicked_coordinates.remove((col, row))
+
+            
+
+
+    # Draw the grid
+    for row in range(ROWS):
+        for col in range(COLS):
+            pygame.draw.rect(screen, grid[row][col], (col * CELL_SIZE[0], row * CELL_SIZE[1], CELL_SIZE[0], CELL_SIZE[1]))
+
+    # Update the display
+    pygame.display.flip()
+
+# Print the clicked coordinates
+print("Clicked Coordinates:", clicked_coordinates)
+
+for y in clicked_coordinates:
+    print(y) 
+# Quit Pygame
+pygame.quit()
+sys.exit()
 
