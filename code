@@ -1,112 +1,129 @@
 import pygame
+import sys
+
+# Initialize Pygame
 pygame.init()
 
-screen_height=700
-screen_width=600
+# Constants
+WIDTH, HEIGHT = 600, 600
+ROWS, COLS = 10, 10
+CELL_SIZE = WIDTH // COLS, HEIGHT // ROWS
 
-screen=pygame.display.set_mode((screen_height,screen_width))
-
+# Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 red = (255,0,0)
-gold = (255,215,0)
-black = (0,0,0)
+# Colors
+white = (255, 255, 255)
+black = (0, 0, 0)
 
-y=red
+# Font
+font = pygame.font.Font(None, 36)
+# Create the grid
+grid = [[WHITE for _ in range(COLS)] for _ in range(ROWS)]
 
-layer_gold= [] 
-layer_red=[]
+#win func
 
 
+
+
+
+# List to store clicked coordinates
+clicked_coordinates = []
+
+# Set up the Pygame window
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Pygame Grid")
+
+# Main game loop
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_1:
-                if(0,0,50,50)not in layer_red:
-                  new_rect = (0, 0, 50, 50)
-                  layer_gold.append(new_rect)
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 3:     
+                # Get the mouse position
+                mouse_x, mouse_y = pygame.mouse.get_pos()
 
-            if event.key == pygame.K_2:
-             if(50,0,50,50)not in layer_red:
-                new_rect = (50,0, 50, 50)
-                layer_gold.append(new_rect)
+                # Calculate the grid cell coordinates
+                col = mouse_x // CELL_SIZE[0]
+                row = mouse_y // CELL_SIZE[1]
 
-            if event.key == pygame.K_3:
-                new_rect = (100,0, 50, 50)
-                layer_gold.append(new_rect) 
+                # Change the color of the clicked cell
+                if 0 <= row < ROWS and 0 <= col < COLS:
+                    if grid[row][col] == WHITE:
+                        grid[row][col] = BLACK
+                        clicked_coordinates.append((col, row))
+                    else:
+                        grid[row][col] = WHITE
+                        clicked_coordinates.remove((col, row))
+            
+            if event.button == 1:     
+                # Get the mouse position
+                mouse_x, mouse_y = pygame.mouse.get_pos()
 
-            if event.key == pygame.K_4:
-                new_rect = (150,0, 50, 50)
-                layer_gold.append(new_rect)
+                # Calculate the grid cell coordinates
+                col = mouse_x // CELL_SIZE[0]
+                row = mouse_y // CELL_SIZE[1]
 
-            if event.key == pygame.K_5:
-                new_rect = (200,0, 50, 50)
-                layer_gold.append(new_rect)
+                # Change the color of the clicked cell
+                if 0 <= row < ROWS and 0 <= col < COLS:
+                    if grid[row][col] == WHITE:
+                        grid[row][col] = red
+                        clicked_coordinates.append((col, row))
+                    else:
+                        grid[row][col] = WHITE
+                        clicked_coordinates.remove((col, row))
+            
+            
+            #check for win condition
+            list=[]
+            list=clicked_coordinates
 
-            if event.key == pygame.K_6:
-                new_rect = (250,0, 50, 50)
-                layer_gold.append(new_rect)
+            for j in range(0,10):
+                for i in range(0,10):
+                    if (i,j) in list and (i+1,j) in list and (i+2,j) in list and (i+3,j) in list:
+                        print("win")
+                        pygame.time.delay(1000)
+                        
+                        
+                    if (i,j) in list and (i,j+1) in list and (i,j+2) in list and (i,j+3) in list:
+                        print("win")
+                        pygame.quit()
+                        sys.exit()
+                    if (i,j) in list and (i-1,j+1) in list and (i-2,j+2) in list and (i-3,j+3) in list:
+                        print("win")
+                        pygame.quit()
+                        sys.exit()
+                    if (i,j) in list and (i+1,j+1) in list and (i+2,j+2) in list and (i+3,j+3) in list:
+                        print("win")
+                        pygame.quit()
+                        sys.exit()
+   
 
-            if event.key == pygame.K_7:
-                new_rect = (300,0, 50, 50)
-                layer_gold.append(new_rect) 
 
 
+    # Draw the grid
+    for row in range(ROWS):
+        for col in range(COLS):
+            pygame.draw.rect(screen, grid[row][col], (col * CELL_SIZE[0], row * CELL_SIZE[1], CELL_SIZE[0], CELL_SIZE[1]))
 
-            if event.key == pygame.K_q:
-                if(0,0,50,50)not in layer_gold:
-                 new_rect = (0,0, 50, 50)
-                 layer_red.append(new_rect)
-
-            if event.key == pygame.K_w:
-                if(50,0,50,50)not in layer_gold:
-                 new_rect = (50,0, 50, 50)
-                 layer_red.append(new_rect)
-
-            if event.key == pygame.K_e:
-                if(100,0,50,50)not in layer_gold:
-                 new_rect = (100,0, 50, 50)
-                 layer_red.append(new_rect)
-
-            if event.key == pygame.K_r:
-                if(150,0,50,50)not in layer_gold:
-                 new_rect = (150,0, 50, 50)
-                 layer_red.append(new_rect)
-
-            if event.key == pygame.K_t:
-                if(200,0,50,50)not in layer_gold:
-                 new_rect = (200,0, 50, 50)
-                 layer_red.append(new_rect)
-
-            if event.key == pygame.K_y:
-                if(250,0,50,50)not in layer_gold:
-                 new_rect = (250,0, 50, 50)
-                 layer_red.append(new_rect)
-
-            if event.key == pygame.K_u:
-                if(300,0,50,50)not in layer_gold:
-                 new_rect = (300,0, 50, 50)
-                 layer_red.append(new_rect)                                                                                     
-
-    screen.fill(black) 
-    #pygame.draw.rect(screen,gold,(200,100,100,100))
-    # pygame.draw.rect(screen,red,(100,100,100,100)) 
-
-    for x in layer_red:
-        pygame.draw.rect(screen,red,(x))
-       
-    for x in layer_gold:
-        pygame.draw.rect(screen,gold,(x))     
-         
-       
-       
-       
-       
-        y=gold
-        
-
+    # Update the display
     pygame.display.flip()
 
+# Print the clicked coordinates
+print("Clicked Coordinates:",clicked_coordinates)
+
+
+
+#lvl3 prototype
+
+print("Clicked Coordinates:",list)
+
+        
+        
+
+# Quit Pygame
 pygame.quit()
+sys.exit()
