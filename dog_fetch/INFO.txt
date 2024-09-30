@@ -1,0 +1,22 @@
+Information File: Training an Agent in a 5x5 2D Custom Environment
+
+Goal:
+The goal of this simulation is to train an agent in a custom-built 5x5 grid 
+environment to reach a target goal (state 24) using Q-learning. The environment 
+has a simple grid layout, and the agent can take four possible actions: move up,
+down, left, or right. The Q-learning algorithm is used to help the agent learn 
+the optimal path to reach the goal, while minimizing exploration as the agent 
+becomes more knowledgeable about the environment.
+
+CONCEPTS:
+
+Custom Environment (Ground class)
+State Space
+Action Space
+Q-Learning Algorithm
+Exploration vs Exploitation (Epsilon-Greedy Policy)
+Hyperparameters
+  Learning Rate (𝛼)
+  Discount Factor (𝛾)
+  Exploration Rate (𝜖)
+Rewards Plot
